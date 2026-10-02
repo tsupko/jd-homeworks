@@ -2,7 +2,7 @@ package edu.tsupko;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import edu.tsupko.catfacts.CatFact;
+import edu.tsupko.model.CatFact;
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
@@ -44,7 +44,7 @@ public class CatFactsApp {
                 );
 
                 List<CatFact> filtered = catFacts.stream()
-                        .filter(fact -> fact.getUpvotes() != null)
+                        .filter(fact -> fact.upvotes() != null)
                         .toList();
 
                 System.out.println("Total facts: " + catFacts.size());
@@ -53,7 +53,7 @@ public class CatFactsApp {
 
                 for (CatFact fact : filtered) {
                     System.out.printf("[%s] %s (by %s, upvotes: %d)%n",
-                            fact.getId(), fact.getText(), fact.getUser(), fact.getUpvotes());
+                            fact.id(), fact.text(), fact.user(), fact.upvotes());
                 }
             }
         }
